@@ -24,7 +24,7 @@ Small and medium businesses generate data across multiple platforms (ERPs, e-com
 
 ## The Solution
 
-Vizu is a **data-centralization and analysis platform** that creates a context layer so **AI agents can perform tasks effectively** — from answering natural-language questions about sales data, to generating reports, to managing knowledge bases — all scoped per tenant with strict data isolation.
+The solution is a **data-centralization and analysis platform** that creates a context layer so **AI agents can perform tasks effectively** — from answering natural-language questions about sales data, to generating reports, to managing knowledge bases — all scoped per tenant with strict data isolation.
 
 <div align="center">
   <img src="screenshots/home.png" alt="Dashboard Home" width="600"/>
@@ -126,7 +126,7 @@ Every layer enforces tenant isolation:
 
 - **PostgreSQL Row-Level Security (RLS)** on all tables — 62 migrations maintain the schema
 - **JWT validation** supporting HS256 + ES256 + RS256 (Supabase Auth)
-- **Per-request context injection** — `VizuClientContext` carries tenant config, enabled tools, tier, and brand voice
+- **Per-request context injection** — `ClientContext` carries tenant config, enabled tools, tier, and brand voice
 - **Tool-level auth** — each MCP tool extracts and validates JWT independently
 - **Tier-based access control** — tools, agents, and features gated by subscription tier (BASIC → PRO → ENTERPRISE → ADMIN)
 
@@ -226,27 +226,27 @@ One of the core engineering decisions: **every reusable capability is a library,
 
 | Library | Purpose |
 |---------|---------|
-| `vizu_agent_framework` | LangGraph builder pattern, state machines, node registry |
-| `vizu_auth` | JWT decode (HS256/ES256/RS256), RLS context injection |
-| `vizu_context_service` | Per-tenant context loading with Redis cache (5min TTL) |
-| `vizu_data_connectors` | Factory for BigQuery, Shopify, VTEX, Loja Integrada |
-| `vizu_db_connector` | SQLAlchemy async engine management |
-| `vizu_elicitation_service` | Agent clarification requests (yes/no, multiple choice, free text) |
-| `vizu_experiment_service` | Experiment manifests, batch evaluation, classification |
-| `vizu_google_suite_client` | Google Sheets, Gmail, Calendar with OAuth token management |
-| `vizu_hitl_service` | Human-in-the-loop review queue with Streamlit UI |
-| `vizu_llm_service` | Provider abstraction (OpenAI, Anthropic, Google, Ollama) with tier budgets |
-| `vizu_mcp_commons` | MCP tool dataclasses, executor with parallel invocation |
-| `vizu_models` | Shared Pydantic/SQLModel domain models |
-| `vizu_observability_bootstrap` | One-line OpenTelemetry + Langfuse + Grafana setup |
-| `vizu_parsers` | PDF, DOCX, CSV, TXT parsing + semantic chunking |
-| `vizu_prompt_management` | Langfuse prompt fetching with Redis cache and builtin fallbacks |
-| `vizu_rag_factory` | Hybrid retrieval (semantic + BM25 + RRF + reranking + MMR) |
-| `vizu_shared_utils` | Common utilities across all services |
-| `vizu_sql_factory` | Text-to-SQL with AST validation, allowlists, PII masking |
-| `vizu_supabase_client` | Typed Supabase SDK wrapper |
-| `vizu_tool_registry` | Tool discovery, tier validation, Docker MCP bridge |
-| `vizu_twilio_client` | WhatsApp webhook integration |
+| ` _agent_framework` | LangGraph builder pattern, state machines, node registry |
+| ` _auth` | JWT decode (HS256/ES256/RS256), RLS context injection |
+| ` _context_service` | Per-tenant context loading with Redis cache (5min TTL) |
+| ` _data_connectors` | Factory for BigQuery, Shopify, VTEX, Loja Integrada |
+| ` _db_connector` | SQLAlchemy async engine management |
+| ` _elicitation_service` | Agent clarification requests (yes/no, multiple choice, free text) |
+| ` _experiment_service` | Experiment manifests, batch evaluation, classification |
+| ` _google_suite_client` | Google Sheets, Gmail, Calendar with OAuth token management |
+| ` _hitl_service` | Human-in-the-loop review queue with Streamlit UI |
+| ` _llm_service` | Provider abstraction (OpenAI, Anthropic, Google, Ollama) with tier budgets |
+| ` _mcp_commons` | MCP tool dataclasses, executor with parallel invocation |
+| ` _models` | Shared Pydantic/SQLModel domain models |
+| ` _observability_bootstrap` | One-line OpenTelemetry + Langfuse + Grafana setup |
+| ` _parsers` | PDF, DOCX, CSV, TXT parsing + semantic chunking |
+| ` _prompt_management` | Langfuse prompt fetching with Redis cache and builtin fallbacks |
+| ` _rag_factory` | Hybrid retrieval (semantic + BM25 + RRF + reranking + MMR) |
+| ` _shared_utils` | Common utilities across all services |
+| ` _sql_factory` | Text-to-SQL with AST validation, allowlists, PII masking |
+| ` _supabase_client` | Typed Supabase SDK wrapper |
+| ` _tool_registry` | Tool discovery, tier validation, Docker MCP bridge |
+| ` _twilio_client` | WhatsApp webhook integration |
 
 ---
 
@@ -291,7 +291,7 @@ One of the core engineering decisions: **every reusable capability is a library,
 
 ```
 apps/
-├── vizu_dashboard/          # React 18 + TypeScript admin dashboard
+├──  _dashboard/          # React 18 + TypeScript admin dashboard
 ├── hitl_dashboard/          # Streamlit HITL review interface
 └── landing/                 # Marketing landing page
 
@@ -319,8 +319,8 @@ docs/                        # Architecture documentation
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/vizubr/vizu-mono.git
-cd vizu-mono
+git clone https://github.com/ br/ -mono.git
+cd  -mono
 cp .env.example .env          # fill in your keys
 
 # 2. Start the development stack
@@ -364,18 +364,10 @@ make cloudrun-push-all # Push to GCP Artifact Registry
 
 ## About
 
-This platform was designed and implemented by me as the **sole engineer** at Vizu, a startup delivering business management and productivity solutions for SMBs.
+This platform was designed and implemented by me as the **sole engineer** using Copilot , the idea is to deliver business management and productivity solutions for SMBs.
 
 The goal: enable non-technical business users to ask questions, get reports, and manage their data through natural conversation — with AI doing the heavy lifting, securely scoped to each tenant's data.
 
-**Key numbers:**
-- ~60,000 lines of Python across 20 libraries and 6 services
-- ~21,000 lines of TypeScript in the React dashboard
-- 62 database migrations maintaining the schema
-- 20+ MCP tools in a centralized tool server
-- 5 Supabase Edge Functions
-- Full observability pipeline (traces, metrics, logs, LLM monitoring)
-
 ---
 
-*Designed and built by Lucas Cruz*
+*Architectured and built by Lucas Cruz*
